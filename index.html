@@ -32,6 +32,17 @@ if (location.protocol.substr(0, 4) === "file")
 	vkBridge.send('VKWebAppInit', {});
 	vkBridge.callMethod('showAllowMessagesFromCommunityBox', {group_id: 220906146});
 </script>
+<script>
+	vkBridge.subscribe((e) => {
+		if (e.detail.type === 'VKWebAppAllowMessagesFromGroupResult') {
+			// handle success
+			console.log('User allowed messages from group');
+		} else if (e.detail.type === 'VKWebAppAllowMessagesFromGroupFailed') {
+			// handle failure
+			console.log('User denied messages from group');
+		}
+	});
+</script>
 
 	<noscript>
 		<div id="notSupportedWrap">
